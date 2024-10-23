@@ -79,6 +79,22 @@ class Simulation(): #Objet simulation, que l'on passe à notre mainEngine
     def launch(self): #Lancer la simulation
         mainEngine.simulation(self)
 
+def create_empty_sim():
+    d = {}
+    d["Nom_Simu"] = ""
+    d["FPS"] = 60
+    d["G"] = 6.67e-11
+    d["dt"] = 86400
+    d["SPACE_X"] = 0
+    d["SPACE_Y"] = 0
+    d["ECHELLE_RAYON"] = 1
+    d["UNIVERSE_CENTER"] = 0
+
+    d["planetes"] = []
+
+    sim = Simulation(d)
+    return sim
+    
 
 class Application(tk.Frame): #Classe d'application principale
     def __init__(self, master=None):
@@ -146,14 +162,14 @@ class Application(tk.Frame): #Classe d'application principale
         fileName = self.Lb.get(tk.ACTIVE)
         dirPath = self.dirVar.get()
         path = dirPath+"/"+fileName
-        with open(path,"r") as f:
+        with open(path,"r",encoding="utf-8") as f:
             data = f.read().replace("\n","").replace("\t","")
             obj = json.loads(data)
             sim = Simulation(obj)
         return sim
-
+    
     def createConfig(self):
-        pass
+        simApp = configForm(self)
 
     def launchConfig(self): #Executer config
         sim = self.listToSim()
@@ -188,7 +204,7 @@ class Application(tk.Frame): #Classe d'application principale
 
 
 class configForm():
-    def __init__(self, master, sim = {}):
+    def __init__(self, master, sim=create_empty_sim()):
         self.master = master
         self.sim = sim
         
