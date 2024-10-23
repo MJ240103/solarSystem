@@ -37,14 +37,14 @@ class Planet:
         if distance < (self.rayon + rayon_soleil):
             solarSystem.remove(self)
 
-    def selfDraw(self, window, echelle_distance, echelle_rayon, centrage, SCREEN_WIDTH, SCREEN_HEIGHT, convertFun):
+    def selfDraw(self, window, ECHELLE_RAYON, centrage, SCREEN_WIDTH, SCREEN_HEIGHT, convertFun):
         """Affiche une planète dans la fenêtre Pygame."""
 
-        rayon = convertFun(self.rayon, self.rayon)[0]/(echelle_rayon)
+        rayon = convertFun(self.rayon, self.rayon)[0] * ECHELLE_RAYON
         x_affiche,y_affiche = convertFun(centrage[0] + self.position[0], centrage[1] + self.position[1])
-        x_affiche,y_affiche = centrage[0] + x_affiche, centrage[1] + y_affiche
+        #x_affiche,y_affiche = centrage[0] + x_affiche, centrage[1] + y_affiche
         
-        #print(x_affiche,y_affiche, centrage)
+        #print(self.nom,self.position[0], centrage[0], self.position[0]+centrage[0])
         #realToDisplay(x,y,1000,1000,1e13,1e13)
         
         # Ne dessiner que si la planète est dans la fenêtre

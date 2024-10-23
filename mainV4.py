@@ -3,6 +3,7 @@ import sys
 from bodies import Planet
 from bodies import runge_kutta
 from collections import defaultdict
+from bouton import Bouton
 
 # Initialisation de Pygame
 pygame.init()
@@ -16,6 +17,7 @@ RED = (255, 50, 50)
 GREEN = (50, 255, 50)
 ORANGE = (255, 165, 50)
 PURPLE = (148, 0, 211)
+GREY = (128, 128, 128)
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 1000
@@ -43,8 +45,6 @@ def draw_centered_cross(window, center_x, center_y, cross_length, color):
 
 
 # Constantes astronomiques
-masseSoleil = 1.989e30
-rayonSoleil = 6.955e8
 G = 6.67384e-11
 
 # Intervalle de temps (en secondes)
@@ -68,6 +68,9 @@ def realToDisplay(x,y,window_x,window_y,space_x,space_y):
     x = x*window_x/space_x
     y = y*window_y/space_y
     return x,y
+
+# Création du bouton pause
+#pause_bouton = Bouton(SCREEN_WIDTH - 150, SCREEN_HEIGHT - 850, 100, 40, "pause", WHITE, GREY, GREY)
 
 # Création des planètes
 # Mercure
@@ -168,8 +171,8 @@ solarSystem.append(neptune)
 # Soleil
 soleil = Planet(
     nom="Soleil",
-    masse=2e30,  # Masse de Neptune en kg
-    rayon=6.96342e5,  # Rayon de Neptune en mètres
+    masse=1.989e30,  # Masse de Neptune en kg
+    rayon=6.955e8,  # Rayon de Neptune en mètres
     position=[SCREEN_WIDTH // 2, SCREEN_HEIGHT //2],  # Distance au Soleil en m sur l'axe x
     vitesse=[0, 0],  # Vitesse en m/s (sur l'axe y)
     acceleration=[0, 0],  # Accélération initiale
@@ -186,22 +189,46 @@ def ScanKeyboard():
 
 zoom = 1.0
 
-bClearScreen = True
-
 # Position de la caméra (coordonnées du centre de la vue)
 #camera_x = 0
 #camera_y = 0
 
 # Boucle principale
 running = True
+#paused = False  # Variable pour suivre l'état de pause
+# Variable pour contrôler l'affichage des trajectoires
+show_orbits = False
+# Variable qui lorsqu'elle vaut true rempli à chaque itération l'écrand de fond
+bClearScreen = True
+
 while running:
     ScanKeyboard()
+    # Gestion des événements
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # Si la fenêtre d'animation est fermée
             running = False  # Termine la boucle principale
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_KP_PLUS:
+                zoom /= 0.99  # Augmenter le zoom pour rapprocher
+            elif event.key == pygame.K_KP_MINUS:
+                zoom *= 0.99  # Réduire le zoom pour éloigner
+            elif event.key == pygame.K_SPACE:
+                show_orbits = not show_orbits  # Bascule de l'affichage des trajectoires
+            elif event.key == pygame.K_ESCAPE:
+                running = False  # Quitte la simulation
 
-    # Mettre le fond en noir
-    window.fill(BLACK)
+    # Mettre le fond en noir uniquement si les orbites ne sont pas affichées
+    if not show_orbits:
+        window.fill(BLACK)
+            # Si le bouton pause est implémenté, ajouter ici la gestion de la touche de pause.
+    
+        # Si le bouton est cliqué alterner entre pause et reprise
+        #if pause_bouton.is_clicked(event): # Vérifie si le bouton pause à été cliqué
+            #paused = not paused #Si l'animation est en pause elle reprend, sinon elle se "pause " :)
+            #pause_bouton.toggle_pause() #Lorsque l'on passe de l'état "pause" à "lancer" le texte change
+
+        # Redessinez le bouton après modification
+        #pause_bouton.draw(window)
 
     # Ajuster les échelles en fonction du zoom
     echelleDistances = SCREEN_HEIGHT * 2.0e-12 * zoom
@@ -209,26 +236,23 @@ while running:
     echelleRayonsPlanete = SCREEN_HEIGHT * 1.0e-6 * zoom
 
     # Création du Soleil
-    pygame.draw.circle(window, YELLOW, sun_position, int(rayonSoleil * echelleRayonSoleil))
-    
+    pygame.draw.circle(window, soleil.couleur, soleil.position, int(soleil.rayon * echelleRayonSoleil))
+
     # Mise à jour des planètes avec Runge-Kutta
+    #if not paused:
     runge_kutta(solarSystem, G, dt)
+
     for planet in solarSystem:
-        planet.selfVanish(solarSystem, sun_position, rayonSoleil)
-        planet.selfDraw(window, echelleDistances, echelleRayonsPlanete, sun_position, SCREEN_WIDTH, SCREEN_HEIGHT, lambda x, y: realToDisplay(x, y, SCREEN_WIDTH, SCREEN_HEIGHT, 1e13 * zoom, 1e13 * zoom))
+        planet.selfVanish(solarSystem, soleil.position, soleil.rayon)
+        planet.selfDraw(window, echelleDistances, echelleRayonsPlanete, soleil.position, SCREEN_WIDTH, SCREEN_HEIGHT, lambda x, y: realToDisplay(x, y, SCREEN_WIDTH, SCREEN_HEIGHT, 1e13 * zoom, 1e13 * zoom))
     
     pygame.display.flip()
-
-    # Gestion du zoom
-    if keysPressed[pygame.K_KP_PLUS]:
-        zoom /= 0.99  # Augmenter le zoom pour rapprocher
-    if keysPressed[pygame.K_KP_MINUS]:
-        zoom *= 0.99  # Réduire le zoom pour éloigner
-    if keysPressed[pygame.K_ESCAPE]:
-        break
     
     # Dessiner la croix au centre
     draw_centered_cross(window, center_x, center_y, cross_length, CROSS_COLOR)
+    
+    # Afficher le bouton pause
+    #pause_bouton.draw(window) 
 
     # Mettre à jour l'affichage
     pygame.display.update()

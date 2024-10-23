@@ -1,0 +1,56 @@
+{
+  "Nom_Simu": "Premiere Simulation",
+  "FPS": 60,
+  "G": -1,
+  "dt": 1,
+  "SPACE_X": 1000,
+  "SPACE_Y": 1000,
+  "ECHELLE_RAYON": 1,
+  "UNIVERSE_CENTER": [500,500],
+  "planetes": [
+    {
+      "nom": "A",
+      "masse": 20,
+      "rayon": 10,
+      "position": [
+        200,
+        0
+      ],
+      "vitesse": [
+        0,
+        -1
+      ],
+      "acceleration": [
+        0,
+        0
+      ],
+      "couleur": [
+        255,
+        0,
+        0
+      ]
+    },
+    {
+      "nom": "B",
+      "masse": 500,
+      "rayon": 10,
+      "position": [
+        0,
+        0
+      ],
+      "vitesse": [
+        0,
+        0
+      ],
+      "acceleration": [
+        0,
+        0
+      ],
+      "couleur": [
+        255,
+        255,
+        255
+      ]
+    }
+  ]
+}
