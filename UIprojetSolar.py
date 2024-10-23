@@ -85,14 +85,17 @@ def create_empty_sim():
     d["FPS"] = 60
     d["G"] = 6.67e-11
     d["dt"] = 86400
-    d["SPACE_X"] = 0
-    d["SPACE_Y"] = 0
-    d["ECHELLE_RAYON"] = 1
-    d["UNIVERSE_CENTER"] = 0
+    d["SPACE_X"] = 1e13
+    d["SPACE_Y"] = 1e13
+    d["ECHELLE_RAYON"] = 600
+    d["UNIVERSE_CENTER"] = [5e12, 5e12]
 
     d["planetes"] = []
+    d_temporaire = {"nom" : "planete1", "masse" : 5.972e24, "rayon" : 6.371e7, "position" : [149.5e9, 0], "vitesse" : [0, 24.077e3], "acceleration" : [0, 0], "couleur" : [0, 0, 255]}
+    d["planetes"].append(d_temporaire)
 
     sim = Simulation(d)
+
     return sim
     
 
@@ -170,6 +173,7 @@ class Application(tk.Frame): #Classe d'application principale
     
     def createConfig(self):
         simApp = configForm(self)
+        #self.fetchDir(path=self.dirVar.get(), headless=True)
 
     def launchConfig(self): #Executer config
         sim = self.listToSim()
@@ -180,22 +184,6 @@ class Application(tk.Frame): #Classe d'application principale
 
         #Création fenêtre et initialisation des champs
         simApp = configForm(self, sim)
-        simApp.Nom_Simu_Var.set(sim.nom)
-        simApp.FPS_Var.set(sim.FPS)
-        simApp.G_Var.set(intToE(sim.G))
-        simApp.dt_Var.set(intToE(sim.dt))
-        simApp.SPACE_X_Var.set(intToE(sim.SPACE_X))
-        simApp.SPACE_Y_Var.set(intToE(sim.SPACE_Y))
-        simApp.UNIVERSE_CENTER_0_Var.set(intToE(sim.UNIVERSE_CENTER[0]))
-        simApp.UNIVERSE_CENTER_1_Var.set(intToE(sim.UNIVERSE_CENTER[1]))
-        simApp.ECHELLE_RAYON_Var.set(intToE(sim.ECHELLE_RAYON))
-        
-        for planet in sim.solarSystem:
-            simApp.Lb.insert(tk.END, planet.nom)
-
-        simApp.Lb.select_set(0)
-        simApp.Lb.event_generate("<<ListboxSelect>>")
-
         sim = simApp.show()
         print(sim.nom)
 
@@ -210,6 +198,10 @@ class configForm():
         
         self.subWindow = tk.Toplevel(master)
         self.createWidgets()
+        self.display_sim_param()
+
+        self.Lb.select_set(0) #Lb correspond à liste box (la liste qui contient les planètes
+        self.Lb.event_generate("<<ListboxSelect>>")
         
     def createWidgets(self):
         #CONFIGURATION GENERALE
@@ -336,6 +328,20 @@ class configForm():
         self.launchConfigButton.grid(row=16,column=4,sticky="NSWE")
         
         self.subWindow.grid()
+    
+    def display_sim_param(self):
+        self.Nom_Simu_Var.set(self.sim.nom)
+        self.FPS_Var.set(self.sim.FPS)
+        self.G_Var.set(intToE(self.sim.G))
+        self.dt_Var.set(intToE(self.sim.dt))
+        self.SPACE_X_Var.set(intToE(self.sim.SPACE_X))
+        self.SPACE_Y_Var.set(intToE(self.sim.SPACE_Y))
+        self.UNIVERSE_CENTER_0_Var.set(intToE(self.sim.UNIVERSE_CENTER[0]))
+        self.UNIVERSE_CENTER_1_Var.set(intToE(self.sim.UNIVERSE_CENTER[1]))
+        self.ECHELLE_RAYON_Var.set(intToE(self.sim.ECHELLE_RAYON))
+        
+        for planet in self.sim.solarSystem:
+            self.Lb.insert(tk.END, planet.nom)
 
     def changePlanetSelection(self, evt):
         w = evt.widget
