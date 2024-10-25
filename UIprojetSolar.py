@@ -303,7 +303,7 @@ class configForm():
         self.AX.grid(row=14, column = 2, sticky="WE")
         self.AY.grid(row=14, column = 3, columnspan=2, sticky="WE")
 
-        tk.Label(self.subWindow, text="Couleur").grid(row=15, column=1,sticky="W")
+        tk.Label(self.subWindow, text="Couleur").grid(row=16, column=1,sticky="W")
         self.RC_Var = tk.StringVar()
         self.GC_Var = tk.StringVar()
         self.BC_Var = tk.StringVar()
@@ -315,19 +315,74 @@ class configForm():
         self.BC.grid(row=15, column = 4, sticky="WE")
         
         #CONFIGURATION COMMANDES
+        self.addPlanetConfigButton = tk.Button(self.subWindow, text="Ajouter planète", command=self.addPlanet)
+        self.addPlanetConfigButton.grid(row=16,column=0,sticky="NSWE")
+        
+        self.deletePlanetConfigButton = tk.Button(self.subWindow, text="Supprimer planète", command=self.deletePlanet)
+        self.deletePlanetConfigButton.grid(row=16,column=1,sticky="NSWE")
+        
         self.savePlanetButton = tk.Button(self.subWindow, text="Sauvegarder planète", command=self.savePlanet)
-        self.savePlanetButton.grid(row=16,column=0,sticky="NSWE")
+        self.savePlanetButton.grid(row=16,column=2,sticky="NSWE")
 
         self.saveConfigButton = tk.Button(self.subWindow, text="Sauvegarder configuration", command=self.saveConfig)
-        self.saveConfigButton.grid(row=16,column=1,sticky="NSWE")
+        self.saveConfigButton.grid(row=16,column=3,sticky="NSWE")
         
         self.deleteConfButton = tk.Button(self.subWindow, text="Supprimer configuration", command=self.deleteConfig)
-        self.deleteConfButton.grid(row=16,column=2,sticky="NSWE")
+        self.deleteConfButton.grid(row=16,column=4,sticky="NSWE")
 
         self.launchConfigButton = tk.Button(self.subWindow, text="Lancer simulation", command=self.launchConfig)
-        self.launchConfigButton.grid(row=16,column=4,sticky="NSWE")
+        self.launchConfigButton.grid(row=16,column=5,sticky="NSWE")
         
         self.subWindow.grid()
+    
+    def addPlanet(self):
+        # Créer une nouvelle planète avec des valeurs par défaut
+        new_planet = Planet(
+            nom="Nouvelle Planète",
+            masse=0,
+            rayon=1,
+            position=[0, 0],
+            vitesse=[0, 0],
+            acceleration=[0, 0],
+            couleur=[0, 0, 0]
+        )
+        
+        # Ajouter la planète au système solaire de la simulation
+        self.sim.solarSystem.append(new_planet)
+        
+        # Mettre à jour la liste des planètes affichée dans la Listbox
+        self.Lb.insert(tk.END, new_planet.nom)
+        self.Lb.select_clear(0, tk.END)
+        self.Lb.select_set(tk.END)  # Sélectionner la nouvelle planète ajoutée
+        self.Lb.event_generate("<<ListboxSelect>>")
+        
+    def deletePlanet(self):
+        # Récupérer l'index de la planète sélectionnée dans la Listbox
+        selected_index = self.Lb.curselection()
+        if not selected_index:
+            return  # Si aucune planète n'est sélectionnée, on quitte la méthode
+        
+        idPlanet = selected_index[0]
+
+        # Supprimer la planète de la liste des planètes de la simulation
+        del self.sim.solarSystem[idPlanet]
+
+        # Mettre à jour la Listbox en supprimant l'entrée correspondante
+        self.Lb.delete(idPlanet)
+
+        # Réinitialiser les champs de saisie des paramètres de planète
+        self.NOM_PLANETE_Var.set("")
+        self.MASSE_Var.set("")
+        self.RAYON_Var.set("")
+        self.X_Var.set("")
+        self.Y_Var.set("")
+        self.VX_Var.set("")
+        self.VY_Var.set("")
+        self.AX_Var.set("")
+        self.AY_Var.set("")
+        self.RC_Var.set("")
+        self.GC_Var.set("")
+        self.BC_Var.set("")
     
     def display_sim_param(self):
         self.Nom_Simu_Var.set(self.sim.nom)

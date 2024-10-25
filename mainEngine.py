@@ -10,17 +10,6 @@ from collections import defaultdict
 # CE FIHIER Y SERA IMPORTE                                      #
 #################################################################
 
-##########  ############
-##########  ##############
-####        #####      ###
-####        #####      ###
-#######     ##############
-#######     ############
-####        #####
-####        #####
-##########  #####
-##########  #####
-
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 YELLOW = (255, 255, 50)
@@ -141,7 +130,7 @@ def simulation(config):
 
         # Affichage des planètes
         for planet in config.solarSystem:
-            planet.selfDraw(window, config.ECHELLE_RAYON, curCenter, SCREEN_WIDTH, SCREEN_HEIGHT, lambda x, y: realToDisplay(x, y, SCREEN_WIDTH, SCREEN_HEIGHT, config.SPACE_X * zoom, config.SPACE_Y* zoom))
+            planet.selfDraw(window, (config.ECHELLE_RAYON), curCenter, SCREEN_WIDTH, SCREEN_HEIGHT, lambda x, y: realToDisplay(x, y, SCREEN_WIDTH, SCREEN_HEIGHT, config.SPACE_X * zoom, config.SPACE_Y* zoom))
         
         # Dessiner la croix au centre
         draw_centered_cross(window, center_x, center_y, cross_length, CROSS_COLOR)
