@@ -130,7 +130,21 @@ def simulation(config):
 
         # Affichage des planètes
         for planet in config.solarSystem:
-            planet.selfDraw(window, (config.ECHELLE_RAYON), curCenter, SCREEN_WIDTH, SCREEN_HEIGHT, lambda x, y: realToDisplay(x, y, SCREEN_WIDTH, SCREEN_HEIGHT, config.SPACE_X * zoom, config.SPACE_Y* zoom))
+            planet.selfDraw(
+                window,
+                config.ECHELLE_RAYON,
+                curCenter,
+                SCREEN_WIDTH,
+                SCREEN_HEIGHT,
+                lambda x, y: realToDisplay(
+                    (x - curCenter[0]) * zoom + SCREEN_WIDTH / 2,
+                    (y - curCenter[1]) * zoom + SCREEN_HEIGHT / 2,
+                    SCREEN_WIDTH,
+                    SCREEN_HEIGHT,
+                    config.SPACE_X,
+                    config.SPACE_Y
+                )
+            )
         
         # Dessiner la croix au centre
         draw_centered_cross(window, center_x, center_y, cross_length, CROSS_COLOR)
@@ -141,8 +155,7 @@ def simulation(config):
         clock.tick(config.FPS)
 
     # Fermeture de PyGame à la fin de l'execution
-    spygame.quit()
-    sys.exit()
+    pygame.quit()
 
 if __name__ == "__main__":
     simulation()
