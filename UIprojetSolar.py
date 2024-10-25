@@ -440,7 +440,20 @@ class configForm():
         planet.couleur = [int(self.RC_Var.get()), int(self.GC_Var.get()), int(self.BC_Var.get())]
         
     def deleteConfig(self):
-        pass
+        # Obtenir le nom de fichier de la configuration actuellement ouverte
+        config_name = self.sim.nom + ".mj"
+        directory = self.master.dirVar.get()
+        path = os.path.join(directory, config_name)
+
+        if os.path.exists(path):
+            os.remove(path)
+            print(f"Configuration '{config_name}' supprimée.")
+            # Fermer la fenêtre de configuration
+            self.subWindow.destroy()
+            # Rafraîchir la liste des configurations dans l'application principale
+            self.master.fetchDir(path=directory, headless=True)
+        else:
+            print(f"Le fichier '{config_name}' n'existe pas.")
 
     def saveConfig(self):
         self.updSim()
