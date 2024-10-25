@@ -28,7 +28,7 @@
         "masse":5.972e24,
         "rayon":6.371e7,
         "position":[149.5e9,0],
-        "vitesse":[0,0],
+        "vitesse":[0,24.077e3],
         "acceleration":[0,0],
         "couleur":[0,0,255]
         },

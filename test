@@ -1,0 +1,1 @@
+{"Nom_Simu": "test", "FPS": 60, "G": 6.67e-11, "dt": 86400.0, "SPACE_X": 10000000000000.0, "SPACE_Y": 10000000000000.0, "ECHELLE_RAYON": 600.0, "UNIVERSE_CENTER": [5000000000000.0, 5000000000000.0], "planetes": [{"nom": "planete1", "masse": 5.972e+24, "rayon": 63710000.0, "position": [149500000000.0, 0], "vitesse": [0, 24077.0], "acceleration": [0, 0], "couleur": [0, 0, 255]}]}

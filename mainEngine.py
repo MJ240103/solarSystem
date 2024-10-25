@@ -19,6 +19,7 @@ GREEN = (50, 255, 50)
 ORANGE = (255, 165, 50)
 PURPLE = (148, 0, 211)
 GREY = (128, 128, 128)
+STEP = 100
 
 def simulation(config):
     # Initialisation de Pygame
@@ -50,8 +51,8 @@ def simulation(config):
         pygame.draw.line(window, color, (center_x, center_y - cross_length), (center_x, center_y + cross_length), 2)
 
     def realToDisplay(x,y,window_x,window_y,space_x,space_y):
-        x = x*window_x/space_x
-        y = y*window_y/space_y
+        x = (x*window_x/space_x)
+        y = (y*window_y/space_y)
         return x,y
 
     #Variable de simu
@@ -73,10 +74,12 @@ def simulation(config):
             if event.type == pygame.QUIT:  # Si la fenêtre d'animation est fermée
                 running = False  # Termine la boucle principale
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_KP_PLUS:
-                    zoom /= 0.99  # Augmenter le zoom pour rapprocher
-                elif event.key == pygame.K_KP_MINUS:
-                    zoom *= 0.99  # Réduire le zoom pour éloigner
+                if event.key == pygame.K_g:
+                    zoom -= 0.1  # Augmenter le zoom pour rapprocher
+                    print(zoom)
+                elif event.key == pygame.K_h:
+                    zoom += 0.1  # Réduire le zoom pour éloigner
+                    print(zoom)
                 elif event.key == pygame.K_SPACE:
                     show_orbits = not show_orbits  # Bascule de l'affichage des trajectoires
                 elif event.key == pygame.K_ESCAPE:
@@ -94,19 +97,19 @@ def simulation(config):
                     
                 elif event.key == pygame.K_z: #Changer la planète suivi
                     follow_mode = 2
-                    curCenter = [curCenter[0], curCenter[1] + (config.SPACE_Y * zoom) / 100]
+                    curCenter = [curCenter[0], curCenter[1] + config.SPACE_Y / STEP]
 
                 elif event.key == pygame.K_s: #Changer la planète suivi
                     follow_mode = 2
-                    curCenter = [curCenter[0], curCenter[1] - (config.SPACE_Y * zoom) / 100]
+                    curCenter = [curCenter[0], curCenter[1] - config.SPACE_Y / STEP]
 
                 elif event.key == pygame.K_d: #Changer la planète suivi
                     follow_mode = 2
-                    curCenter = [curCenter[0] - (config.SPACE_X * zoom) / 100, curCenter[1]]
+                    curCenter = [curCenter[0] - config.SPACE_X/STEP, curCenter[1]]
 
                 elif event.key == pygame.K_q: #Changer la planète suivi
                     follow_mode = 2
-                    curCenter = [curCenter[0] + (config.SPACE_X * zoom) / 100, curCenter[1] + (config.SPACE_Y * zoom) / 1000]
+                    curCenter = [curCenter[0] + config.SPACE_X/STEP, curCenter[1]]
                     
 
         # Mettre le fond en noir uniquement si les orbites ne sont pas affichées
@@ -122,7 +125,7 @@ def simulation(config):
             curCenter = config.UNIVERSE_CENTER
         elif follow_mode == 1:
             pos = config.solarSystem[follow_index].position
-            curCenter = (config.SPACE_X/2 - pos[0], config.SPACE_Y/2 - pos[1])
+            curCenter = (config.SPACE_X/2 - pos[0]*zoom, config.SPACE_Y/2 - pos[1]*zoom)
             #print(config.solarSystem[follow_index].nom, pos, curCenter)
         elif follow_mode == 2:
             pass
@@ -136,15 +139,8 @@ def simulation(config):
                 curCenter,
                 SCREEN_WIDTH,
                 SCREEN_HEIGHT,
-                lambda x, y: realToDisplay(
-                    (x - curCenter[0]) * zoom + SCREEN_WIDTH / 2,
-                    (y - curCenter[1]) * zoom + SCREEN_HEIGHT / 2,
-                    SCREEN_WIDTH,
-                    SCREEN_HEIGHT,
-                    config.SPACE_X,
-                    config.SPACE_Y
-                )
-            )
+                zoom,
+                lambda x, y: realToDisplay(x,y,SCREEN_WIDTH,SCREEN_HEIGHT,config.SPACE_X,config.SPACE_Y))
         
         # Dessiner la croix au centre
         draw_centered_cross(window, center_x, center_y, cross_length, CROSS_COLOR)
