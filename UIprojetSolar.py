@@ -441,7 +441,7 @@ class configForm():
         
     def deleteConfig(self):
         # Obtenir le nom de fichier de la configuration actuellement ouverte
-        config_name = self.sim.nom + ".mj"
+        config_name = self.master.Lb.get(tk.ACTIVE) # Récupère l'élément actif de la fenêtre listebox
         directory = self.master.dirVar.get()
         path = os.path.join(directory, config_name)
 
