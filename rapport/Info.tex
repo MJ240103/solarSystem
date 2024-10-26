@@ -1,0 +1,58 @@
+
+
+\documentclass[a4paper, 12pt]{report}
+
+% Pdf LaTeX
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}  
+\usepackage[T1]{fontenc}     
+
+\usepackage{graphicx} % Pour insérer une image
+\usepackage{amsmath}         % Pour la mise en forme des formules mathématiques
+\usepackage{hyperref}        % Pour créer des liens dans le document
+\usepackage{geometry}        % Pour ajuster les marges
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+
+
+
+
+
+
+
+\begin{document}
+
+% Informations pages de garde
+ 
+\title{\textbf{Compte rendu informatique}}
+\author{COUËRON Lola \\ JOLY Marine \\ \\ L3 Physique, Université Grenoble Alpes}
+\date{Novembre 2024}
+
+\maketitle % Générer la page de garde
+
+% Résumé du document
+%\begin{abstract}
+%blabla
+%\end{abstract}
+{
+\hypersetup{hidelinks}
+
+\renewcommand{\contentsname}{Sommaire}
+\tableofcontents
+}
+
+
+\chapter{Présentation générale du sujet}
+
+\chapter{Structure du programme}
+
+\chapter{Code et commentaires détaillés}
+
+\chapter{Exemples}
+
+\chapter{Annexe}
+
+
+
+
+\end{document}
