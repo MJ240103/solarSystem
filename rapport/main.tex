@@ -59,12 +59,92 @@
     Le fichier mainEngine.py utilise les équations et paramètres physiques du fichier bodies.py afin de simuler intéractions attractives entre un certain nombre de corps et avec certains paramètres par le biais de PyGame. Ce nombre de corps et ces paramètres seront définis par l'utilisateur grâce à l'application contenue dans le fichier IUsolarSystem. Celui-ci utilise Tkinter pour lancer la simulation PyGame. Les simulations peuvent être stockées dans des fichiers python (ex : Simulation1.py) ou dans des fichiers json (ex : sysSolaire.mj).
 
 \section{Partie physique}
+
+    Le fichier bodies.py ...
+    
     \subsection{Implémentation naïve}
 
     \subsection{Implémentation avec Runge-Kutta d'ordre 4}
 
+        Voyant les limites de l'implémentation naïve, nous nous sommes intéréssées aux différents algorithmes qui permettent de modéliser un mouvement numériquement. Au cours de nos recherches, deux algorithmes ont particulièrement attiré notre attention : Euler et Runge-Kutta d'ordre 4 (RK4).
+
+        \\
+
+         La méthode d'Euler est une procédure numérique pour résoudre par approximation des équations différentielles du premier ordre avec une condition initiale. La méthode d'Euler a l'avantage d'être simple mais l'erreur induite peut être assez élevée si le pas est choisi trop grand.
+
+        \subsubsection{Théorie mathématique :}
+
+            Par conséquent, nous nous sommes tout naturellement tournées vers la méthode RK4. En effet, cette méthode d'analyse numérique d'approximation de solutions d'équations différentielles repose sur le principe de l'itération, c'est-à-dire qu'une première estimation de la solution est utilisée pour calculer une seconde estimation, plus précise, et ainsi de suite. La méthode RK4 est une méthode d'ordre 4, ce qui signifie que l'erreur commise à chaque étape est de l'ordre de h5, alors que l'erreur totale accumulée est de l'ordre de h4. Ainsi, elle est bien plus précise que la méthode d'Euler.
+
+            \\
+
+            On considère le problème suivant : \\
+
+            $y' = f(t,y)$ avec $y(t_0) = y_0$
+
+            \\
+
+            La méthode RK4 est donnée par l'équation : \\
+
+            $y_{n+1} = y_n + \frac{h}{6} (k_1 + 2k_2 + 2k_3 + k_4$
+
+            \\
+
+            où \\
+
+            $k1 = f(t_n, y_n)$ \\
+            $k_2 = f(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_1)$ \\
+            $k_3 = f(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_2)$ \\
+            $k_4 = f(t_n + h, y_n + hk_3)$
+
+        \subsubsection{Code informatique :}
+
+            \\
+
+             \begin{figure}[h]
+                  \centering
+                  \includegraphics[width=0.5\linewidth]{RK4partie1.png}
+                 \caption{\label{fig:Git}Etape 1 de la méthode RK4.}
+             \end{figure}
+
+            \\
+
+            \begin{figure}[h]
+                 \centering
+                 \includegraphics[width=0.5\linewidth]{RK4partie2.png}
+                 \caption{\label{fig:Git}Etape 2 de la méthode RK4.}
+            \end{figure}
+
+             \\
+
+              \begin{figure}[h]
+                   \centering
+                  \includegraphics[width=0.5\linewidth]{RK4partie3.png}
+                  \caption{\label{fig:Git}Etape 3 de la méthode RK4.}
+              \end{figure}
+
+            \\
+
+              \begin{figure}[h]
+                 \centering
+                 \includegraphics[width=0.5\linewidth]{RK4partie4.png}
+                 \caption{\label{fig:Git}Etape 4 de la méthode RK4.}
+              \end{figure}
+
+             \\
+
+            \begin{figure}[h]
+                 \centering
+                 \includegraphics[width=0.5\linewidth]{RK4partiefin.png}
+                 \caption{\label{fig:Git}Intération de la méthode RK4.}
+             \end{figure}
+
+              \\
+
 \section{Partie interface}
     \subsection{Interface de simulation avec pygame}
+
+    Le fichier mainEngine.py 
 
     \subsection{Intrface de l'application avec Tkinter}
 
