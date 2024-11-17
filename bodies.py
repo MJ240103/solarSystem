@@ -26,15 +26,6 @@ class Planet:
                 ax += force * (dx / distance)
                 ay += force * (dy / distance)
         return ax, ay
-        
-    def selfVanish(self, solarSystem, position_soleil, rayon_soleil):
-        """Supprime la planète si elle est recouverte par le Soleil."""
-        dx = self.position[0] - position_soleil[0]
-        dy = self.position[1] - position_soleil[1]
-        distance = math.sqrt(dx**2 + dy**2)
-        
-        if distance < (self.rayon + rayon_soleil):
-            solarSystem.remove(self)
 
     def selfDraw(self, window, ECHELLE_RAYON, centrage, SCREEN_WIDTH, SCREEN_HEIGHT, zoom, convertFun):
         """Affiche une planète dans la fenêtre Pygame."""
