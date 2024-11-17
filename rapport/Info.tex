@@ -92,7 +92,7 @@ Enfin, nous implantons ces équations en Python. L'appel à la fonction \texttt{
 	\end{figure}
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{img/naif.png}
+		\includegraphics[width=0.8\linewidth]{img/naif.png}
 		\caption{\label{fig: ETape2 Rk4}Fonctions \texttt{setPosition} et \texttt{applyGravity} du module bodies.py}
 	\end{figure}
 	
@@ -127,7 +127,7 @@ La méthode RK4 est donnée par l'équation : $y_{n+1} = y_n + \frac{h}{6} (k_1 
 		\item $k_1$ correspond à la pente au début de l'intervalle. 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{img/RK4partie1.png}
+		\includegraphics[width=0.35\linewidth]{img/RK4partie1.png}
 		\caption{\label{fig: ETape1 Rk4}Etape 1 de la méthode RK4.}  
 	\end{figure}	
 	
@@ -148,7 +148,7 @@ La méthode RK4 est donnée par l'équation : $y_{n+1} = y_n + \frac{h}{6} (k_1 
 \item $k_4$ correspond à la pente de la fin de l'intervalle, obtenue avec la valeur de $y$ calculée en utlisant $k_3$.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{img/RK4partie4.png}
+		\includegraphics[width=0.35\linewidth]{img/RK4partie4.png}
 		\caption{\label{fig: ETape4 Rk4}Etape 4 de la méthode RK4.}  
 	\end{figure}
 	 
@@ -162,7 +162,8 @@ Lorsque la moyenne pondérée des 4 pentes est effectuée, un poids plus importa
   
 %
 %
-%              
+% 
+             
 %%% Chapitre3 %%% ----------------------------------
 \section{Interface graphique de l'application de simulation}
 %
@@ -274,11 +275,13 @@ Comme explicité en 2.2, on utilise RK4 dont la mise à jour en temps réelle pe
 La simulation des mouvements des corps est effectuée à chaque itération de la boucle principale. La méthode de Runge-Kutta est utilisée pour mettre à jour les positions des planètes en fonction des forces gravitationnelles. Cela se produit à la ligne 120 : \texttt{runge\_kutta(config.solarSystem, config.G, config.dt)}
 
 \subsubsection{Affichage}
-La fonction \texttt{realToDisplay} transforme les coordonnées réelles (en fonction de l'espace simulé) en coordonnées adaptées à l'affichage sur la fenêtre Pygame. Ensuite, la méthode \texttt{selfDraw} de l'instance de la classe \texttt{Planet} est utilisée pour afficher la simulation à l'écran.
+La fonction \texttt{realToDisplay} transforme les coordonnées réelles (en fonction de l'espace simulé) en coordonnées adaptées à l'affichage sur la fenêtre Pygame. Ensuite, la méthode \texttt{selfDraw} de l'instance de
+\newgeometry{top=0.5cm,bottom=1.5 cm, left=1 cm, right=1 cm}
+la classe \texttt{Planet} est utilisée pour afficher la simulation à l'écran.
 
 	\begin{figure}[H]
     	\centering
-        \begin{minipage}{0.2\linewidth}
+        \begin{minipage}{0.15\linewidth}
         	\centering
         	\includegraphics[width=\linewidth]{img/couverture.png}
         	\caption{\label{fig:DeuxCorps1} Interaction deux corps sans trace}
@@ -303,7 +306,7 @@ Au lancement de la simulation, les trajectoires des corps ne sont pas affichées
 
 \begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{img/codeTrajectoire.png}
+		\includegraphics[width=0.5\linewidth]{img/codeTrajectoire.png}
 		\caption{\label{fig: Source} Code source du tracé des trajectoires}  
 	\end{figure}
 
@@ -313,7 +316,7 @@ On utilise les touches (g,h) pour zoomer/dézoomer. Cette fonctionnalité est re
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{img/optionZoom.png}
+		\includegraphics[width=0.3\linewidth]{img/optionZoom.png}
 		\caption{\label{fig: Source} Code source de la fonctionnalité}  
 	\end{figure}
 
@@ -321,7 +324,7 @@ Le zoom influence la manière dont les positions des planètes sont converties p
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.5\linewidth]{img/priseEnCompte.png}
+		\includegraphics[width=0.4\linewidth]{img/priseEnCompte.png}
 		\caption{\label{fig: priseEnCompte} Prise en compte de la fonctionnalité zoom}  
 	\end{figure}
 	
@@ -332,13 +335,13 @@ On peut choisir laquelle des deux planètes est placée au centre du système.
 
 	\begin{figure}[H]
     	\centering
-    	\begin{minipage}{0.27\linewidth}
+    	\begin{minipage}{0.25\linewidth}
         	\centering
         	\includegraphics[width=\linewidth]{img/centrage1.png}
         	\caption{\label{fig:centrage1} Centrage 1}
     	\end{minipage}
     	\hspace{0.05\linewidth}  % Espace horizontal entre les deux images
-    	\begin{minipage}{0.27\linewidth}
+    	\begin{minipage}{0.25\linewidth}
         	\centering
         	\includegraphics[width=\linewidth]{img/centrage2.png}
         	\caption{\label{fig:centrage2} Centrage 2} 
@@ -366,7 +369,7 @@ La simulation du système solaire permet de mettre en évidence le caractère at
         	\caption{\label{fig:systsolaire1} Centrage Soleil}
     	\end{minipage}
     	\hspace{0.05\linewidth}  % Espace horizontal entre les deux images
-    	\begin{minipage}{0.27\linewidth}
+    	\begin{minipage}{0.25\linewidth}
         	\centering
         	\includegraphics[width=\linewidth]{img/systemesolaireCentrage2.png}
         	\caption{\label{fig:systsolaire2} Changement de configuration} 
@@ -374,7 +377,7 @@ La simulation du système solaire permet de mettre en évidence le caractère at
 	\end{figure} 
 
 %%% Chapitre5 %%% ----------------------------------
-%\newgeometry{top=2 cm, bottom=2 cm, left=1.5 cm, right=1.5 cm}
+\newgeometry{top=2 cm, bottom=2 cm, left=1.5 cm, right=1.5 cm}
 \section{Conclusion}
 \subsection{Extension du programme}
 Il est possible de simuler n'importe quel système mécanique avec notre application puisque le RK4 est indépendant de la force utilisée. On pourrait par exemple simuler l'intéraction de 42 particules avec différentes charges.

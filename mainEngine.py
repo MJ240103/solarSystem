@@ -46,6 +46,7 @@ def simulation(config):
         pygame.draw.line(window, color, (center_x, center_y - cross_length), (center_x, center_y + cross_length), 2)
 
     def realToDisplay(x,y,window_x,window_y,space_x,space_y):
+        """ convertie les coordonnées réelles en coordonnées adaptées à l'affichage """
         x = (x*window_x/space_x)
         y = (y*window_y/space_y)
         return x,y
@@ -71,10 +72,8 @@ def simulation(config):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_g:
                     zoom -= 0.1  # Augmenter le zoom pour rapprocher
-                    print(zoom)
                 elif event.key == pygame.K_h:
                     zoom += 0.1  # Réduire le zoom pour éloigner
-                    print(zoom)
                 elif event.key == pygame.K_SPACE:
                     show_orbits = not show_orbits  # Bascule de l'affichage des trajectoires
                 elif event.key == pygame.K_ESCAPE:
@@ -121,7 +120,6 @@ def simulation(config):
         elif follow_mode == 1:
             pos = config.solarSystem[follow_index].position
             curCenter = (config.SPACE_X/2 - pos[0]*zoom, config.SPACE_Y/2 - pos[1]*zoom)
-            #print(config.solarSystem[follow_index].nom, pos, curCenter)
         elif follow_mode == 2:
             pass
         
