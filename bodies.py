@@ -15,7 +15,6 @@ class Planet:
     def gravite(self, autres_planetes, G):
         """Calcule l'accélération en fonction des autres planètes et du Soleil."""
         ax, ay = 0, 0
-        #print("GRAVITE")
         for autre_planete in autres_planetes:
             if autre_planete != self:
                 dx = autre_planete.position[0] - self.position[0]
@@ -46,10 +45,6 @@ class Planet:
         x0_real,y0_real = convertFun(centrage[0], centrage[1])
         x_affiche = x_real*zoom + x0_real
         y_affiche = y_real*zoom + y0_real
-        #x_affiche,y_affiche = centrage[0] + x_affiche, centrage[1] + y_affiche
-        
-        #print(self.nom,self.position[0], centrage[0], self.position[0]+centrage[0])
-        #realToDisplay(x,y,1000,1000,1e13,1e13)
         
         # Ne dessiner que si la planète est dans la fenêtre
         pygame.draw.circle(window, self.couleur, (x_affiche, y_affiche), rayon)
