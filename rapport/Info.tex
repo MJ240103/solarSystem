@@ -51,7 +51,7 @@ L'objectif initial est de simuler l’interaction Terre - Soleil. Pour se faire 
     \end{enumerate}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.45\linewidth]{imgGitHub.png}
+        \includegraphics[width=0.45\linewidth]{img/imgGitHub.png}
         \caption{\label{fig:Git}Fichiers de la branche main du repository solarSystem.}
     \end{figure} 
      
@@ -87,12 +87,12 @@ Enfin, nous implantons ces équations en Python. L'appel à la fonction \texttt{
 
     \begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{naifMain.png}
+		\includegraphics[width=0.4\linewidth]{img/naifMain.png}
 		\caption{\label{fig: naifMain }Execution de \texttt{applyGravity} et \texttt{setPosition} afin de générer les coordonnées des corps}  
 	\end{figure}
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{naif.png}
+		\includegraphics[width=0.4\linewidth]{img/naif.png}
 		\caption{\label{fig: ETape2 Rk4}Fonctions \texttt{setPosition} et \texttt{applyGravity} du module bodies.py}
 	\end{figure}
 	
@@ -127,35 +127,35 @@ La méthode RK4 est donnée par l'équation : $y_{n+1} = y_n + \frac{h}{6} (k_1 
 		\item $k_1$ correspond à la pente au début de l'intervalle. 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{RK4partie1.png}
+		\includegraphics[width=0.4\linewidth]{img/RK4partie1.png}
 		\caption{\label{fig: ETape1 Rk4}Etape 1 de la méthode RK4.}  
 	\end{figure}	
 	
 \item  $k_2$ correspond à la pente au milieu de l'intervalle. Elle s'obtient en utilisant $k_1$ pour calculer la valeur de $y$ au point $t_n + \frac{h}{2}$ par le biais de la méthode d'Euler.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{RK4partie2.png}
+		\includegraphics[width=0.4\linewidth]{img/RK4partie2.png}
 		\caption{\label{fig: ETape2 Rk4}Etape 2 de la méthode RK4.}  
 	\end{figure}
 	
 \item $k_3$ est la pente au milieu de l'intervalle, mais obtenue en utilisant $k_2$ pour $y$.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{RK4partie3.png}
+		\includegraphics[width=0.4\linewidth]{img/RK4partie3.png}
 		\caption{\label{fig: ETape3 Rk4}Etape 3 de la méthode RK4.}  
 	\end{figure}
 	
 \item $k_4$ correspond à la pente de la fin de l'intervalle, obtenue avec la valeur de $y$ calculée en utlisant $k_3$.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{RK4partie4.png}
+		\includegraphics[width=0.4\linewidth]{img/RK4partie4.png}
 		\caption{\label{fig: ETape4 Rk4}Etape 4 de la méthode RK4.}  
 	\end{figure}
 	 
 Lorsque la moyenne pondérée des 4 pentes est effectuée, un poids plus important est donné aux pentes du milieu.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{RK4partiefin.png}
+		\includegraphics[width=0.4\linewidth]{img/RK4partiefin.png}
 		\caption{\label{fig: ETapeFin Rk4} Itération de la méthode RK4.}  
 	\end{figure}
     \end{itemize} 
@@ -213,13 +213,13 @@ Nous transformons ensuite notre objet directement convertis depuis le Json en un
     	\centering
     	\begin{minipage}{0.5\linewidth}
         	\centering
-        	\includegraphics[width=\linewidth]{toJson.png}
+        	\includegraphics[width=\linewidth]{img/toJson.png}
         	\caption{\label{fig:TOJSON} Importation d'un fichier via le module Json}
     	\end{minipage}
     	\hspace{0.05\linewidth}  % Espace horizontal entre les deux images
     	\begin{minipage}{0.38\linewidth}
         	\centering
-        	\includegraphics[width=\linewidth]{simulationClasse.png}
+        	\includegraphics[width=\linewidth]{img/simulationClasse.png}
         	\caption{\label{fig:simClasse} Classe simulation} 
     	\end{minipage}
 	\end{figure}
@@ -229,7 +229,7 @@ Nous transformons ensuite notre objet directement convertis depuis le Json en un
 	L'interface, réalisée à l'aide de Tkinter se présente comme suit:
     \begin{figure}[H]
 		\centering
-		\includegraphics[width=0.2\linewidth]{mainInterface.png}
+		\includegraphics[width=0.2\linewidth]{img/mainInterface.png}
 		\caption{\label{fig: IntMain} Interface Fenêtre - principale}  
 	\end{figure}
 
@@ -253,7 +253,7 @@ Nous transformons ensuite notre objet directement convertis depuis le Json en un
 
     \begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]						{interfaceFenetreSecondaire.png}
+		\includegraphics[width=0.4\linewidth]{img/interfaceFenetreSecondaire.png}
 		\caption{\label{fig: IntSec} Interface Fenêtre - secondaire}  
 	\end{figure}
 
@@ -280,19 +280,19 @@ La fonction \texttt{realToDisplay} transforme les coordonnées réelles (en fonc
     	\centering
         \begin{minipage}{0.2\linewidth}
         	\centering
-        	\includegraphics[width=\linewidth]{couverture.png}
+        	\includegraphics[width=\linewidth]{img/couverture.png}
         	\caption{\label{fig:DeuxCorps1} Interaction deux corps sans trace}
     	\end{minipage}
         \hspace{0.05\linewidth}  % Espace horizontal entre les deux images
     	\begin{minipage}{0.2\linewidth}
         	\centering
-        	\includegraphics[width=\linewidth]{interactionDeuxCorps.png}
+        	\includegraphics[width=\linewidth]{img/interactionDeuxCorps.png}
         	\caption{\label{fig:DeuxCorps2} Interaction deux corps avec trace}
     	\end{minipage}
     	\hspace{0.05\linewidth}  % Espace horizontal entre les deux images
     	\begin{minipage}{0.2\linewidth}
         	\centering
-        	\includegraphics[width=\linewidth]{interactionDeuxCorps2.png}
+        	\includegraphics[width=\linewidth]{img/interactionDeuxCorps2.png}
         	\caption{\label{fig:DeuxCorps3} Evolution de l'interaction deux corps} 
     	\end{minipage}
 	\end{figure} 
@@ -303,7 +303,7 @@ Au lancement de la simulation, les trajectoires des corps ne sont pas affichées
 
 \begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{codeTrajectoire.png}
+		\includegraphics[width=0.4\linewidth]{img/codeTrajectoire.png}
 		\caption{\label{fig: Source} Code source du tracé des trajectoires}  
 	\end{figure}
 
@@ -313,7 +313,7 @@ On utilise les touches (g,h) pour zoomer/dézoomer. Cette fonctionnalité est re
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\linewidth]{optionZoom.png}
+		\includegraphics[width=0.4\linewidth]{img/optionZoom.png}
 		\caption{\label{fig: Source} Code source de la fonctionnalité}  
 	\end{figure}
 
@@ -321,7 +321,7 @@ Le zoom influence la manière dont les positions des planètes sont converties p
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.5\linewidth]{priseEnCompte.png}
+		\includegraphics[width=0.5\linewidth]{img/priseEnCompte.png}
 		\caption{\label{fig: priseEnCompte} Prise en compte de la fonctionnalité zoom}  
 	\end{figure}
 	
@@ -334,13 +334,13 @@ On peut choisir laquelle des deux planètes est placée au centre du système.
     	\centering
     	\begin{minipage}{0.27\linewidth}
         	\centering
-        	\includegraphics[width=\linewidth]{centrage1.png}
+        	\includegraphics[width=\linewidth]{img/centrage1.png}
         	\caption{\label{fig:centrage1} Centrage 1}
     	\end{minipage}
     	\hspace{0.05\linewidth}  % Espace horizontal entre les deux images
     	\begin{minipage}{0.27\linewidth}
         	\centering
-        	\includegraphics[width=\linewidth]{centrage2.png}
+        	\includegraphics[width=\linewidth]{img/centrage2.png}
         	\caption{\label{fig:centrage2} Centrage 2} 
     	\end{minipage}
 	\end{figure} 
@@ -352,7 +352,7 @@ A partir de l'interface principale de la fenêtre Tkinter on peut lancer la simu
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.27\linewidth]{json.png}
+		\includegraphics[width=0.27\linewidth]{img/json.png}
 		\caption{\label{fig: json} Fichier JSON}  
 	\end{figure}
 	
@@ -362,13 +362,13 @@ La simulation du système solaire permet de mettre en évidence le caractère at
     	\centering
     	\begin{minipage}{0.3\linewidth}
         	\centering
-        	\includegraphics[width=\linewidth]{systemeSolaireCentrage1.png}
+        	\includegraphics[width=\linewidth]{img/systemeSolaireCentrage1.png}
         	\caption{\label{fig:systsolaire1} Centrage Soleil}
     	\end{minipage}
     	\hspace{0.05\linewidth}  % Espace horizontal entre les deux images
     	\begin{minipage}{0.27\linewidth}
         	\centering
-        	\includegraphics[width=\linewidth]{systemesolaireCentrage2.png}
+        	\includegraphics[width=\linewidth]{img/systemesolaireCentrage2.png}
         	\caption{\label{fig:systsolaire2} Changement de configuration} 
     	\end{minipage}
 	\end{figure} 
