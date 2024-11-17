@@ -10,14 +10,9 @@ from collections import defaultdict
 # CE FIHIER Y SERA IMPORTE                                      #
 #################################################################
 
+# Couleurs nécessaires pour le moteur de simulation
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-YELLOW = (255, 255, 50)
-BLUE = (50, 50, 255)
-RED = (255, 50, 50)
-GREEN = (50, 255, 50)
-ORANGE = (255, 165, 50)
-PURPLE = (148, 0, 211)
 GREY = (128, 128, 128)
 STEP = 100
 
@@ -34,7 +29,7 @@ def simulation(config):
 
     # Mire qui indique le centre de la fenêtre d'affichage et qui permet d'observer le mouvement du Soleil
     # Couleur de la croix
-    CROSS_COLOR = (0, 0, 0)  # Blanc
+    CROSS_COLOR = WHITE
 
     # Position du centre de la fenêtre
     center_x = SCREEN_WIDTH // 2

@@ -6,7 +6,8 @@ from bodies import Planet
 import mainEngine
 
 
-def eToFloat(s): #String "1e10" -> int 10
+def eToFloat(s):
+    """ String "1e10" -> int 10 """
     if "e" in s:
         print(s)
         s = s.split("e")
@@ -17,7 +18,8 @@ def eToFloat(s): #String "1e10" -> int 10
     else:
         return float(s)
 
-def intToE(n): #int 10000 -> String "1e4"
+def intToE(n):
+    """ int 10000 -> String "1e4" """
     if abs(n) < 10:
         return str(n)
     expo = 0
@@ -26,7 +28,8 @@ def intToE(n): #int 10000 -> String "1e4"
         expo += 1
     return "{}e{}".format(n, expo)
 
-class Simulation(): #Objet simulation, que l'on passe à notre mainEngine
+class Simulation():
+    """ Objet simulation, que l'on passe à notre mainEngine """
     def __init__(self, json="{}"):
         self.nom = json["Nom_Simu"]
         self.FPS = json["FPS"]
@@ -50,6 +53,7 @@ class Simulation(): #Objet simulation, que l'on passe à notre mainEngine
             ))
             
     def simToJson(self):
+        """ Convertit un fichier simulation .py en fichier .json """
         d = {}
         d["Nom_Simu"] = self.nom
         d["FPS"] = self.FPS
@@ -76,10 +80,12 @@ class Simulation(): #Objet simulation, que l'on passe à notre mainEngine
         return json.dumps(d)
         
         
-    def launch(self): #Lancer la simulation
+    def launch(self):
+        """ Lancer la simulation """
         mainEngine.simulation(self)
 
 def create_empty_sim():
+    """ Créer une simulation vide """
     d = {}
     d["Nom_Simu"] = ""
     d["FPS"] = 60
@@ -336,7 +342,7 @@ class configForm():
         self.subWindow.grid()
     
     def addPlanet(self):
-        # Créer une nouvelle planète avec des valeurs par défaut
+        """ Créer une nouvelle planète avec des valeurs par défaut """
         new_planet = Planet(
             nom="Nouvelle Planète",
             masse=0,
@@ -357,6 +363,7 @@ class configForm():
         self.Lb.event_generate("<<ListboxSelect>>")
         
     def deletePlanet(self):
+        """ Supprimer une planète lors de la création/modification d'une simulation par le biais de l'interface tkinter """
         # Récupérer l'index de la planète sélectionnée dans la Listbox
         selected_index = self.Lb.curselection()
         if not selected_index:
